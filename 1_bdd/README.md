@@ -47,25 +47,25 @@ se visualice la base de datos creada).
 ### Desarrollo:
 1. Se declaran archivo de configuración `docker-compose.yml` para instalar PostgreSQL y archivo de configuración de ambiente `.env` para configurar las variables de entorno, que en este caso, de conexión a la BD:
 
-![config_files](/assets/images/docker_composed.png)
+![config_files](assets/images/docker_composed.png)
 
  - en la captura se pueden apreciar cómo se configura el servicio de PostgreSQL, se le asigna un nombre, se selecciona la imagen de PostgreSQL 12.20-alpine, se le asigna un puerto, se le asigna un volumen para persistir los datos (físicos) y se le asignan credenciales de acceso que se obtienen de las variables de entorno.
 
 2. Se ejecuta el comando `docker-compose up -d` para levantar el contenedor de PostgreSQL (la bandera `-d` es para que se ejecute en segundo plano).
 
-![docker_running](/assets/images/psql_server.png)
+![docker_running](assets/images/psql_server.png)
 
 - captura del servidor de PostgreSQL corriendo en Docker.
 
 3. Revisión de la conexión a la base de datos `biblioteca` con TablePlus.
 
-![cnx_ready](/assets/images/cnx_ready.png)
-![db_tree](/assets/images/db_tree.png)
+![cnx_ready](assets/images/cnx_ready.png)
+![db_tree](assets/images/db_tree.png)
 
 - captura de la conexión exitosa al puerto de PSQL con las credenciales declaradas en archivo de configuración yml, en conjunto del árbol de elementos de la base de datos `biblioteca` en TablePlus.
 
 **extra**: se crea tabla `libros` con los campos solicitados en el caso práctico.
-![tables_ready](/assets/images/tbl_books.png)
+![tables_ready](assets/images/tbl_books.png)
 
 </details>
 
