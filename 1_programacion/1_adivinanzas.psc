@@ -23,17 +23,21 @@ Proceso Adivinanzas
 		Para iteracion <- 1 Hasta maxIntentos Con Paso 1 Hacer
 			Escribir  "Intento: ", iteracion, " de " , maxIntentos, ": Ingrese su número";
 			Leer intento;
+			//Revisar de que el intento no sea mayor la numero maximo
+			Si intento > limSuperior Entonces
+				Escribir "Error ===> El intento no puede ser superior al numero maximo seleccionado";
+			FinSi
 			
+			Si intento < numeroEscogido Entonces
+				Escribir "El número es mayor.";
+			FinSi;
+			Si intento > numeroEscogido Entonces
+				Escribir "El número es menor.";
+			FinSi
 			Si intento = numeroEscogido Entonces
 				Escribir "Felicidades, el número era: ", intento;
-				iteracion <- maxIntentos +1;
-			SiNo
-				Si intento < numeroEscogido Entonces
-					Escribir "El número es mayor.";
-				Sino
-					Escribir "El número es menor.";
-				FinSi
-			FinSi
+				iteracion <- maxIntentos + 1;
+			finsi;
 		FinPara
 		// Si no lo adivinó
 		Si intento <> numeroEscogido Entonces
