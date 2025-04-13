@@ -2,46 +2,52 @@ Proceso Adivinanzas
 	// Consignas:
 	// 1.- Obtener (declarar) numero min, max y max de intentos
 	Definir limInferior, limSuperior, numeroEscogido Como Entero;
-	Definir intento, maxIntentos, iteracion Como Entero;
+	Definir intento, maxIntentos, iteracion, intentosRestantes Como Entero;
 	
-	//2.- Pedir lÌmites
-	Escribir "Ingrese n˙nero mÌnimo para adivinar";
+	//2.- Pedir l√≠mites
+	Escribir "Ingrese n√∫nero m√≠nimo para adivinar";
 	Leer  limInferior;
-	Escribir  "Ingrese n˙mero m·ximo para adivinar";
+	Escribir  "Ingrese n√∫mero m√°ximo para adivinar";
 	Leer limSuperior;
 	
 	// revisar que el limite inferior no sea mayor al superior
 	si limSuperior < limInferior Entonces
-		Escribir "ERROR ==> El n˙mero m·ximo no puede ser menos al mÌnimo";
+		Escribir "ERROR ==> El n√∫mero m√°ximo no puede ser menos al m√≠nimo";
 	SiNo
-		// 3.- Pedir n˙mero m·ximo de intentos
-		Escribir "Ingrese cantidad m·xima de intentos";
+		// 3.- Pedir n√∫mero m√°ximo de intentos
+		Escribir "Ingrese cantidad m√°xima de intentos";
 		Leer maxIntentos;
-		//4.- Generar n˙mero aleatoreo
+		//4.- Generar n√∫mero aleatoreo
 		numeroEscogido <- obtenerNumero(limInferior, limSuperior);
-		// Generar iteracion para crear maximo de intentos
+		// Generar iteracion para crear maximo de intentos 
+		// + contador de intentos (iteracion)
 		Para iteracion <- 1 Hasta maxIntentos Con Paso 1 Hacer
-			Escribir  "Intento: ", iteracion, " de " , maxIntentos, ": Ingrese su n˙mero";
+			Escribir  "Intento: ", iteracion, " de " , maxIntentos, ": Ingrese su n√∫mero";
 			Leer intento;
-			//Revisar de que el intento no sea mayor la numero maximo
+			// Revisar de que los intentos se encuentren dentro de los par√°metros.
 			Si intento > limSuperior Entonces
-				Escribir "Error ===> El intento no puede ser superior al numero maximo seleccionado";
+				Escribir "Error ===> El n√∫mero ingresado no puede ser superior al numero m√°ximo a adivinar";
 			FinSi
-			
+			Si intento < limInferior Entonces
+				Escribir "Error ===> El n√∫mero ingresado no puede ser inferior al numero m√≠nimo a adivinar";
+			FinSi
+			intentosRestantes <- maxIntentos - iteracion;
+			// Comparar n√∫mero generado contra intento del usuario
+			// + revision de intentos restantes.
 			Si intento < numeroEscogido Entonces
-				Escribir "El n˙mero es mayor.";
+				Escribir "El n√∫mero es mayor. Te quedan ", intentosRestantes, " intentos";
 			FinSi;
 			Si intento > numeroEscogido Entonces
-				Escribir "El n˙mero es menor.";
+				Escribir "El n√∫mero es menor. Te quedan ", intentosRestantes, " intentos";
 			FinSi
 			Si intento = numeroEscogido Entonces
-				Escribir "Felicidades, el n˙mero era: ", intento;
+				Escribir "Felicidades, el n√∫mero era: ", intento;
 				iteracion <- maxIntentos + 1;
 			finsi;
 		FinPara
-		// Si no lo adivinÛ
+		// Si no lo adivin√≥
 		Si intento <> numeroEscogido Entonces
-			Escribir "Lo siento, no adivinaste. El n˙mero era: ", numeroEscogido;
+			Escribir "Lo siento, no adivinaste. El n√∫mero era: ", numeroEscogido;
 		FinSi
 	FinSi
 FinProceso
