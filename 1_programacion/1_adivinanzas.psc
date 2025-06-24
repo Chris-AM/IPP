@@ -1,62 +1,102 @@
-Proceso Adivinanzas
-	// Consignas:
-	// 1.- Obtener (declarar) numero min, max y max de intentos
-	Definir limInferior, limSuperior, numeroEscogido Como Entero;
-	Definir intento, maxIntentos, iteracion, intentosRestantes Como Entero;
+Proceso juegoAdivinanzas
+	Definir limiteMinimo, limiteMaximo, numeroCreado, numerosIngresados Como Entero;
+	Definir numeroIngresado, maxIntentos, intentosRestantes, turnos Como Entero;
+	Definir isAdivinado Como Logico;
 	
-	//2.- Pedir lÃ­mites
-	Escribir "Ingrese nÃºnero mÃ­nimo para adivinar";
-	Leer  limInferior;
-	Escribir  "Ingrese nÃºmero mÃ¡ximo para adivinar";
-	Leer limSuperior;
+	// Establecer límites
+	Escribir "**** Bienvenido al juego de Adivinazas ****";
+	Escribir "Ingrese núnero mínimo para adivinar";
+	Leer limiteMinimo;
+	Escribir "Ingrese número máximo para adivinar";
+	Leer limiteMaximo;
 	
 	// revisar que el limite inferior no sea mayor al superior
-	si limSuperior < limInferior Entonces
-		Escribir "ERROR ==> El nÃºmero mÃ¡ximo no puede ser menos al mÃ­nimo";
+	si limiteMaximo < limiteMinimo Entonces
+		Escribir "ERROR ==> El número máximo no puede ser menos al mínimo";
 	SiNo
-		// 3.- Pedir nÃºmero mÃ¡ximo de intentos
-		Escribir "Ingrese cantidad mÃ¡xima de intentos";
+		// Pedir número máximo de intentos
+		Escribir "Ingrese cantidad máxima de intentos";
 		Leer maxIntentos;
-		//4.- Generar nÃºmero aleatoreo
-		numeroEscogido <- obtenerNumero(limInferior, limSuperior);
-		// Generar iteracion para crear maximo de intentos 
-		// + contador de intentos (iteracion)
-		Para iteracion <- 1 Hasta maxIntentos Con Paso 1 Hacer
-			Escribir  "Intento: ", iteracion, " de " , maxIntentos, ": Ingrese su nÃºmero";
-			Leer intento;
-			// Revisar de que los intentos se encuentren dentro de los parÃ¡metros.
-			Si intento > limSuperior Entonces
-				Escribir "Error ===> El nÃºmero ingresado no puede ser superior al numero mÃ¡ximo a adivinar";
+		
+		Dimensionar numerosIngresados[maxIntentos];
+		intentosRestantes <- maxIntentos;
+		
+		Escribir "Adivina el número entre: ", limiteMinimo, " y: ", limiteMaximo;
+		
+		numeroCreado <- obtenerNumero(limiteMinimo, limiteMaximo);
+		
+		turnos <- 1;
+		
+		isAdivinado <- Falso;
+		
+		// Actualizacion Para => Repetir
+		Repetir
+			Escribir "Ingresa que número crees que es el correcto. Tienes: ", intentosRestantes " intentos Restantes";
+			Leer numeroIngresado;
+			Si revisionDuplicados(numerosIngresados, turnos, numeroIngresado) Entonces
+				Escribir "El número ya fue ingresado, has usado estos intentos: ";
+				listarNumeros(numerosIngresados, turnos);
+			SiNo
+				numerosIngresados[turnos] <- numeroIngresado;
+				Escribir "Número ingresado: ", numeroIngresado, " es...";
+				// Revision si número ingresado es vålido entre el rango de números
+				Si numeroIngresado > limiteMaximo Entonces
+					Escribir "Error ===> El número ingresado no puede ser superior al numero máximo a adivinar";
+				SiNo
+					si numeroIngresado < limiteMinimo Entonces
+						Escribir "Error ===> El número ingresado no puede ser inferior al numero mínimo a adivinar";
+					SiNo
+						si numeroIngresado < numeroCreado Entonces
+							Escribir "Incorrecto! El número es mayor. Te quedan ", intentosRestantes, " intentos";
+						FinSi
+						si numeroIngresado > numeroCreado Entonces
+							Escribir "Incorrecto! El número es menor. Te quedan ", intentosRestantes, " intentos";
+						FinSi
+						si numeroIngresado == numeroCreado Entonces
+							Escribir "Correcto! Adivinaste el número";
+							isAdivinado <- Verdadero;
+						FinSi
+						intentosRestantes <- intentosRestantes -1;
+						turnos = turnos +1;
+					FinSi
+				FinSi
 			FinSi
-			Si intento < limInferior Entonces
-				Escribir "Error ===> El nÃºmero ingresado no puede ser inferior al numero mÃ­nimo a adivinar";
-			FinSi
-			intentosRestantes <- maxIntentos - iteracion;
-			// Comparar nÃºmero generado contra intento del usuario
-			// + revision de intentos restantes.
-			Si intento < numeroEscogido Entonces
-				Escribir "El nÃºmero es mayor. Te quedan ", intentosRestantes, " intentos";
-			FinSi;
-			Si intento > numeroEscogido Entonces
-				Escribir "El nÃºmero es menor. Te quedan ", intentosRestantes, " intentos";
-			FinSi
-			Si intento = numeroEscogido Entonces
-				Escribir "Felicidades, el nÃºmero era: ", intento;
-				iteracion <- maxIntentos + 1;
-			finsi;
-		FinPara
-		// Si no lo adivinÃ³
-		Si intento <> numeroEscogido Entonces
-			Escribir "Lo siento, no adivinaste. El nÃºmero era: ", numeroEscogido;
+		Hasta Que intentosRestantes == 0 o isAdivinado == Verdadero
+		si isAdivinado == Verdadero Entonces
+			Escribir "Ganaste en : ", turnos -1, " intentos.";
+		SiNo
+			Escribir  "Perdiste, el número era:", numeroCreado;
 		FinSi
 	FinSi
+	
 FinProceso
 
 SubProceso resultado <- obtenerNumero ( min, max )
 	Definir rango, num, resultado Como Entero;
 	Definir random Como Real;
-	
-    rango <- max - min + 1;
-    random <- Azar(rango) ;
-    resultado <- random + min;
+	rango <- max - min + 1;
+	random <- Azar(rango) ;
+	resultado <- random + min;
 FinSubProceso
+
+Funcion listarNumeros (listaDeNumeros, turnos)
+	Definir iteracion Como Entero;
+	Escribir Sin Saltar " [";
+	Para iteracion <- 1 Hasta turnos -1 Hacer
+		Escribir Sin Saltar " ", listaDeNumeros[iteracion];
+	FinPara
+	Escribir " ]";
+FinFuncion
+
+Funcion duplicado <- revisionDuplicados (listaDeNumeros, turnos, nuevo)
+	Definir iteracion Como Entero;
+	Definir duplicado Como Logico;
+	duplicado <- Falso;
+	si turnos > 1 Entonces
+		para iteracion <- 1 Hasta turnos -1 Hacer
+			si nuevo == listaDeNumeros[iteracion] Entonces
+				duplicado <- Verdadero;
+			FinSi
+		FinPara
+	FinSi
+FinFuncion
