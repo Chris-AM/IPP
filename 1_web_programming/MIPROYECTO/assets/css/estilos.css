@@ -1,0 +1,140 @@
+@import url("https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Lato", sans-serif;
+}
+
+body {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  background: linear-gradient(135deg, #555252, #f792f6);
+}
+
+.container {
+  max-width: 700px;
+  width: 100%;
+  background-color: #fff;
+  padding: 25px 30px;
+  border-radius: 25px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+}
+
+.container h1 {
+  text-align: left;
+  color: #333;
+  margin-bottom: 20px;
+  font-size: 25px;
+  font-weight: 500;
+  position: relative;
+}
+
+.container h1::before {
+  content: "";
+  position: absolute;
+  width: 50px;
+  height: 3px;
+  background: linear-gradient(135deg, #555252, #f792f6);
+  bottom: -5px;
+  left: 0;
+  border-radius: 5px;
+}
+
+.content form .form-group {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin: 20px 0 12px 0;
+}
+
+form .form-group .input-box {
+  width: calc(50% - 10px);
+  position: relative;
+  margin-bottom: 15px;
+}
+
+form .form-group .input-description {
+  width: 100%;
+  flex-basis: 100%;
+  margin-bottom: 15px;
+}
+
+form .input-box label.details {
+  display: block;
+  font-size: 20px;
+  color: #333;
+  margin-bottom: 5px;
+  font-weight: 500;
+}
+
+form .input-box input#categoryIcon {
+  padding-top: 10px;
+}
+
+.form-group .input-box input {
+  height: 50px;
+  width: 100%;
+  padding: 0 10px;
+  font-size: 15px;
+  border: 1px solid #555252;
+  border-radius: 5px;
+  outline: none;
+  transition: all 0.3s ease;
+  border-bottom-width: 2px;
+}
+
+.form-group .input-box input:focus {
+  border-color: #8d678c;
+}
+
+.form-group .input-box textarea {
+  height: 100px;
+  width: 100%;
+  padding: 10px;
+  font-size: 15px;
+  border: 1px solid #555252;
+  border-radius: 5px;
+  outline: none;
+  transition: all 0.3s ease;
+  resize: none;
+}
+
+.buttons-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+form .button {
+  height:  40px;;
+  width: calc(50% - 10px);
+  border-radius: 5px;
+  border: none;
+  color: #fff;
+  font-size: 18px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+form .button.save-button {
+  background: linear-gradient(135deg, rgba(235, 125, 219, 0.39), rgba(60, 57, 72, 0.297));
+  opacity: 0.9;
+}
+
+form .button.save-button:hover {
+  background: linear-gradient(135deg, #f792f6, #555252);
+}
+
+form .button.cancel-button {
+  background: #912e42;
+}
+
+form .button.cancel-button:hover {
+  background: #b33a4f;
+  border: #333 2px solid;
+}

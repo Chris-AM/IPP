@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../assets/css/estilos.css">
+    <title>Agregar Productos</title>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Agregar Producto</h1>
+        <div class="content">
+            <form action="#" method="post">
+                <div class="form-group">
+                    <div class="input-box">
+                        <label class="details" for="#">Nombre del Producto:</label>
+                        <input type="text" placeholder="Nuevo Producto" id="productName" name="productName" required />
+                    </div>
+                    <div class="input-box">
+                        <label for="#" class="details">Categoría del Producto:</label>
+                        <input type="text" placeholder="Categoría" id="productCategory" name="productCategory" required />
+                    </div>
+                    <div class="input-box">
+                        <label class="details" for="#">Ícono del Producto:</label>
+                        <input type="file" placeholder="Ícono" id="productIcon" name="productIcon" required />
+                    </div>
+                    <div class="input-box">
+                        <label class="details" for="#">Precio del Producto:</label>
+                        <input type="number" placeholder="Precio" id="productPrice" name="productPrice" required />
+                    </div>
+                    <div class="input-box input-description">
+                        <label class="details" for="descripcion">Descripción:</label>
+                        <textarea id="description" name="description" placeholder=" Descripción del producto" rows="4" cols="50"
+                            required></textarea>
+                    </div>
+                </div>
+                <div class="buttons-container">
+                    <button class="button save-button" type="submit">Guardar</button>
+                    <button class="button cancel-button" type="button">Cancelar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>
